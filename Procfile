@@ -1,1 +1,1 @@
-web: ruby rack_app.rb 
+web: bundle exec ruby rack_app.rb 
