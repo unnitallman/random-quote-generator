@@ -6,8 +6,12 @@ require 'json'
 port = ENV['PORT'] || 3000
 set :bind, '0.0.0.0'
 set :port, port
-set :protection, false
 set :sessions, false
+
+# Disable all protection including host authorization
+configure do
+  set :protection, :except => [:host_authorization, :frame_options, :path_traversal, :ip_spoofing, :form_token, :json_csrf, :http_origin]
+end
 
 helpers do
   def fetch_random_quotes(count)
