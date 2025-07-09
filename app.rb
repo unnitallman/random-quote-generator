@@ -8,9 +8,12 @@ set :bind, '0.0.0.0'
 set :port, port
 set :sessions, false
 
-# Disable all protection including host authorization
+# Completely disable all protection
+disable :protection
+
+# Remove protection middleware entirely
 configure do
-  set :protection, :except => [:host_authorization, :frame_options, :path_traversal, :ip_spoofing, :form_token, :json_csrf, :http_origin]
+  use Rack::Session::Pool, :expire_after => 2592000
 end
 
 helpers do
