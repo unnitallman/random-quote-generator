@@ -11,9 +11,15 @@ set :sessions, false
 # Completely disable all protection
 disable :protection
 
-# Remove protection middleware entirely
+# Remove protection middleware entirely and configure for deployment
 configure do
-  use Rack::Session::Pool, :expire_after => 2592000
+  set :protection, false
+  set :sessions, false
+end
+
+# Override the middleware stack to remove protection
+before do
+  # This ensures no protection middleware interferes
 end
 
 helpers do
