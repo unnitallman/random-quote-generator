@@ -11,6 +11,9 @@ class QuoteApp < Sinatra::Base
   port = ENV['PORT'] || 3000
   set :bind, '0.0.0.0'
   set :port, port
+  
+  # Use embedded templates
+  set :inline_templates, true
 
   helpers do
     def fetch_random_quotes(count)
