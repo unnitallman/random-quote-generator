@@ -4,6 +4,8 @@ require 'json'
 
 set :bind, '0.0.0.0'
 set :port, 3000
+set :protection, :except => [:frame_options]
+disable :protection
 
 helpers do
   def fetch_random_quotes(count)
