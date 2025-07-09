@@ -3,7 +3,7 @@ require 'net/http'
 require 'json'
 
 set :bind, '0.0.0.0'
-set :port, 4567
+set :port, 3000
 
 helpers do
   def fetch_random_quotes(count)
