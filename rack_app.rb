@@ -63,4 +63,47 @@ class QuoteApp < Sinatra::Base
 end
 
 # Start the app
-QuoteApp.run! 
+QuoteApp.run!
+
+__END__
+
+@@layout
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Quote Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; background: #f9f9f9; }
+    .container { max-width: 600px; margin: auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+    h1 { color: #333; }
+    form { margin-bottom: 2em; }
+    input[type=number] { width: 60px; padding: 0.3em; }
+    .quote { margin: 1em 0; padding: 1em; background: #f0f0f0; border-left: 4px solid #0074D9; }
+    .author { font-style: italic; color: #555; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <%= yield %>
+    <footer style="margin-top:2em; color:#aaa; font-size:0.9em;">Powered by Quotable API</footer>
+  </div>
+</body>
+</html>
+
+@@index
+<h1>Random Quote Generator</h1>
+<form action="/quotes" method="post">
+  <label for="n">How many quotes do you want? (1-20):</label>
+  <input type="number" id="n" name="n" min="1" max="20" value="3" required>
+  <button type="submit">Get Quotes</button>
+</form>
+
+@@quotes
+<h1>Here are your <%= @n %> random quote(s):</h1>
+<% @quotes.each_with_index do |quote, i| %>
+  <div class="quote">
+    <%= i+1 %>. <%= quote.split(' - ')[0] %><br>
+    <span class="author">- <%= quote.split(' - ')[1] %></span>
+  </div>
+<% end %>
+<a href="/">&#8592; Get more quotes</a> 
